@@ -37,13 +37,13 @@ var ms1=new Notify("info","This is a message!",msg_click_fn,1);
 **3.参数:**
 
 构造器的参数为status,text,click_fn,type,id  注意顺序
-参数名 | 参数说明
----- | ---
-status	| 消息的状态,用于改变type=1消息的样式和type=2消息的tag,值：info/danger/warning/success,默认:info
-text |	消息的内容,默认:""
-click_fn |	点击消息会执行的函数,默认:null
-type |	类型,值：1/2;1是bootstrap的消息样式,2是H5 Notification的提醒.默认:2
-id	| 消息的id,和该消息的Dom元素的id无关,仅用于标示该消息,例如已读状态向数据库反馈会用到.默认:1
+|参数名 | 参数说明|
+|:----:|:---:|
+|status	| 消息的状态,用于改变type=1消息的样式和type=2消息的tag,值：info/danger/warning/success,默认:info|
+|text |	消息的内容,默认:""|
+|click_fn |	点击消息会执行的函数,默认:null|
+|type |	类型,值：1/2;1是bootstrap的消息样式,2是H5 Notification的提醒.默认:2|
+|id	| 消息的id,和该消息的Dom元素的id无关,仅用于标示该消息,例如已读状态向数据库反馈会用到.默认:1|
 
 
 ----------

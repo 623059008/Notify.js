@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Message Management</title>
+        <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="Notify.js"></script>
+    </head>
+    <body>
+        <div id="msg_show" style="width:50%;height:100%;position:fixed;top:2px;border:1px #fff solid;background:#FFFF99;"></div>
+        <button class="btn btn-default" id="create_msg" style="position:fixed;bottom:50%;left:20%;">生成消息</button>
+        <div id="intro" class="text-left" style="width:50%;position:fixed;right:0;background:#fff;height:100%;padding:2%;overflow-y:auto;">
+            <p>
+                <center><h1>Notify.js</h1></center>
+                Notify.js实现了方便快捷的消息管理，让你可以发布多条消息，用户会看到一条消息，当一条消息被关闭时，会继续显示下一条消息.
+                <br/>
+                如何使用:<br/>
+                1.引入文件<br/>
+                如果你需要type=1的消息显示，必须要引入bootstrap
+                <br/>
+                <pre>&lt;link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"&gt;<br/>&lt;script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"&gt;&lt;/script&gt;<br/></pre>
+                <pre>&lt;script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"&gt;&lt;/script&gt;<br/>&lt;script src="Notify.js"&gt;&lt;/script&gt;</pre>
+
+            </p>
+            <p>
+                2.使用:
+                <br/>
+                <pre>//你可以在任何地方声明一条消息,记得选择消息的type<br/>//默认type为2，即H5 Notification提醒<br/>//Notification提醒只能在有服务器的情况下访问才会产生<br/>var ms1=new Notify("info","This is a message!",msg_click_fn,1);<br/>//msg_click_fn是点击消息的事件</pre>
+            </p>
+            <p>
+                3.参数:<br/>
+                <pre>构造器的参数为status,text,click_fn,type,id  注意顺序</pre>
+                <table class="table table-bordered" style="text-align:center;">
+                    <tr><td>status</td><td>消息的状态,用于改变type=1消息的样式和type=2消息的tag,值：info|danger|warning|success,默认:info</td></tr>
+                    <tr><td>text</td><td>消息的内容,默认:""</td></tr>
+                    <tr><td>click_fn</td><td>点击消息会执行的函数,默认:null</td></tr>
+                    <tr><td>type</td><td>类型,值：1 | 2,1是bootstrap的消息样式,2是H5 Notification的提醒.默认:2</td></tr>
+                    <tr><td>id</td><td>消息的id,和该消息的Dom元素的id无关,仅用于标示该消息,例如已读状态向数据库反馈会用到.默认:1</td></tr>
+                </table>
+            </p>
+        </div>
+        <script type="text/javascript">
+            console.dir(Notify);
+            var msg_show=$("#msg_show");
+            Notify.init(msg_show);
+            function msg_click_fn(){
+                var color=["#66CCFF","#66FFCC","#CC66CC","#CCFFCC","#CCFF66","#FFFF99"];
+                $("#msg_show").css("background",color[parseInt(Math.random()*(color.length))]);
+            };
+            var ms1=new Notify("info","This is a message!<br/>Please read it and close it.<br/>Thank you!<br/>There are lots of words.",msg_click_fn,1);
+            var ms2=new Notify("warning","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
+            var ms3=new Notify("danger","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
+            var ms4=new Notify("success","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
+            var ms5=new Notify("info","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
+            $("#create_msg").click(function(event) {
+                var statusList=["info","warning","danger","success"];
+                var ms=new Notify(statusList[parseInt(Math.random()*(statusList.length))],"This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
+            });
+        </script>
+    </body>
+</html>

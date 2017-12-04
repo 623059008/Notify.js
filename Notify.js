@@ -1,17 +1,24 @@
-var Notify=function(status,text,click_fn,type,id){
+/*!
+ * Notify.js v1.0.3
+ * by RT
+ * @time 20171204
+ */
+var Notify=function(options){
+    //status,text,click_fn,type,id
     //初始化一条消息,并储存在消息池中FIFS
     this.getuuid=function(){
       Notify.uuid=Notify.uuid+1;
       return Notify.uuid;
     }
     var msg=this;
-    msg.dbid=id||1;//用作反馈db的信息记录
+    msg.dbid=options.id||1;//用作反馈db的信息记录
     msg.id=this.getuuid();
-    msg.status=status||"info";
-    msg.text=text||"Default Message.";
-    msg.click_fn=click_fn||null;
+    msg.status=options.status||"info";
+    msg.text=options.text||"Default Message.";
+    msg.click_fn=options.click||null;
+    //It works for repeated pushing,but in fact,there is no chance to push one msg twice.
     msg.append=false;
-    msg.type=type||2;//默认Notification提醒,1是bootstrap提醒
+    msg.type=options.type||2;//默认Notification提醒,1是bootstrap提醒
     Notify.MsgList.push(msg);
     //每一条消息的html的生成函数
     this.gethtml=function(){
@@ -33,7 +40,7 @@ var Notify=function(status,text,click_fn,type,id){
         case "success":status="成功:";break;
         case "danger":status="危险:";break;
       };
-      var msg=new Notification('消息', {
+      var msg=new Notification('FGO消息', {
               tag:this.status,
               body: status+this.text,
               icon: 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=727023099,1772061912&fm=27&gp=0.jpg',
@@ -78,6 +85,7 @@ Notify.run=function(){
                         }
                         msg.onclose=function(){
                           //不执行消息绑定的事件,直接关闭
+                          msg.close();
                           setTimeout(function () {
                             Notify.run();
                           }, 500);
@@ -96,6 +104,7 @@ Notify.run=function(){
                 }
                 msg.onclose=function(){
                   //不执行消息绑定的事件,直接关闭
+                  msg.close();
                   setTimeout(function () {
                     Notify.run();
                   }, 500);

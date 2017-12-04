@@ -30,7 +30,7 @@
             </p>
             <p>
                 3.参数:<br/>
-                <pre>构造器的参数为status,text,click_fn,type,id  注意顺序</pre>
+                <pre>构造器的参数为options{status:"",text:"",click:function(){},type:1 or 2,id:""}</pre>
                 <table class="table table-bordered" style="text-align:center;">
                     <tr><td>status</td><td>消息的状态,用于改变type=1消息的样式和type=2消息的tag,值：info|danger|warning|success,默认:info</td></tr>
                     <tr><td>text</td><td>消息的内容,默认:""</td></tr>
@@ -44,18 +44,60 @@
             console.dir(Notify);
             var msg_show=$("#msg_show");
             Notify.init(msg_show);
-            function msg_click_fn(){
+            function msg_click(){
                 var color=["#66CCFF","#66FFCC","#CC66CC","#CCFFCC","#CCFF66","#FFFF99"];
                 $("#msg_show").css("background",color[parseInt(Math.random()*(color.length))]);
             };
-            var ms1=new Notify("info","This is a message!<br/>Please read it and close it.<br/>Thank you!<br/>There are lots of words.",msg_click_fn,1);
-            var ms2=new Notify("warning","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
-            var ms3=new Notify("danger","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
-            var ms4=new Notify("success","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
-            var ms5=new Notify("info","This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
+            var options={
+                status:"info",
+                text:"This is a message!Please read it and close it.Thank you!",
+                click:msg_click,
+                type:1
+            };
+            var ms1=new Notify(options);
+            var options={
+                status:"info",
+                text:"This is a message!Please read it and close it.Thank you!",
+                click:msg_click,
+                type:1
+            };
+            var ms2=new Notify(options);
+            var options={
+                status:"warning",
+                text:"This is a message!Please read it and close it.Thank you!",
+                click:msg_click,
+                type:1
+            };
+            var ms3=new Notify(options);
+            var options={
+                status:"success",
+                text:"This is a message!Please read it and close it.Thank you!",
+                click:msg_click,
+                type:1
+            };
+            var ms4=new Notify(options);
+            var options={
+                status:"danger",
+                text:"This is a message!Please read it and close it.Thank you!",
+                click:msg_click,
+                type:1
+            };
+            var ms5=new Notify(options);
+            var options={
+                status:"info",
+                text:"This is a message!Please read it and close it.Thank you!",
+                click:msg_click,
+                type:1
+            };
             $("#create_msg").click(function(event) {
                 var statusList=["info","warning","danger","success"];
-                var ms=new Notify(statusList[parseInt(Math.random()*(statusList.length))],"This is a message!Please read it and close it.Thank you!",msg_click_fn,1);
+                var options={
+                    status:statusList[parseInt(Math.random()*(statusList.length))],
+                    text:"This is a message!Please read it and close it.Thank you!",
+                    click:msg_click,
+                    type:1,
+                };
+                var ms=new Notify(options);
             });
         </script>
     </body>

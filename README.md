@@ -36,7 +36,7 @@ var ms1=new Notify("info","This is a message!",msg_click_fn,1);
 
 **3.参数:**
 
-构造器的参数为status,text,click_fn,type,id  注意顺序
+构造器的参数为options{status:"",text:"",click:function(){},type:1 or 2,id:""}
 ![Alt text](https://github.com/623059008/Notify.js/raw/master/table.png)
 
 

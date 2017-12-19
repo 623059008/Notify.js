@@ -26,7 +26,15 @@
             <p>
                 2.使用:
                 <br/>
-                <pre>//你可以在任何地方声明一条消息,记得选择消息的type<br/>//默认type为2，即H5 Notification提醒<br/>//Notification提醒只能在有服务器的情况下访问才会产生<br/>var ms1=new Notify("info","This is a message!",msg_click_fn,1);<br/>//msg_click_fn是点击消息的事件</pre>
+                <pre>//你可以在任何地方声明一条消息,记得选择消息的type<br/>//默认type为2，即H5 Notification提醒<br/>//Notification提醒只能在有服务器的情况下访问才会产生<br/>
+var options={
+    status:"info",
+    text:"This is a message!Please read it and close it.Thank you!",
+    click:msg_click,
+    type:1
+};
+var msg=new Notify(options);<br/>
+//msg_click_fn是点击消息的事件</pre>
             </p>
             <p>
                 3.参数:<br/>

@@ -26,7 +26,13 @@ Notify.js实现了方便快捷的消息管理，让你可以发布多条消息�
 //你可以在任何地方声明一条消息,记得选择消息的type
 //默认type为2，即H5 Notification提醒
 //Notification提醒只能在有服务器的情况下访问才会产生
-var ms1=new Notify("info","This is a message!",msg_click_fn,1);
+var options={
+    status:"info",
+    text:"This is a message!Please read it and close it.Thank you!",
+    click:msg_click,
+    type:1
+};
+var msg=new Notify(options);
 //msg_click_fn是点击消息的事件
 ```
 

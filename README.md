@@ -23,6 +23,14 @@ Notify.js实现了方便快捷的消息管理，让你可以发布多条消息�
 **2.使用:**
 
 ```
+//首先你必须初始化Notify的容器,如果你想使用bootstrap形式的Notify的话.
+Notify.init(Dom);//Default value:body.
+//参数是一个dom元素,你可以使用任何方法获取这个dom元素并传入Notify.init()中.
+//例如
+Notify.init($("#div_head"));
+//对Notify容器的声明只需要一次即可,Notify的容器会在需要时自动显示,显示完成后自动消失(display:none);
+
+
 //你可以在任何地方声明一条消息,记得选择消息的type
 //默认type为2，即H5 Notification提醒
 //Notification提醒只能在有服务器的情况下访问才会产生

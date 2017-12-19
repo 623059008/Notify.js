@@ -1,5 +1,5 @@
 /*!
- * Notify.js v1.0.3
+ * Notify.js v1.0.4
  * by RT
  * @time 20171204
  */
@@ -85,6 +85,9 @@ Notify.run=function(){
                         }
                         msg.onclose=function(){
                           //不执行消息绑定的事件,直接关闭
+                          console.dir(Notify.MsgList);
+                          Notify.MsgList.splice(0,1);
+                          console.dir(Notify.MsgList);
                           msg.close();
                           setTimeout(function () {
                             Notify.run();
@@ -98,12 +101,13 @@ Notify.run=function(){
                 var msg=Notify.MsgList[0].newInfo();
                 //绑定点击和关闭事件
                 msg.onclick=function(){
-                  Notify.MsgList[0].click_fn();
+                  click_fn!=null?Notify.MsgList[0].click_fn():false;
                   Notify.MsgList.splice(0,1);
                   msg.close();//会触发onclose事件
                 }
                 msg.onclose=function(){
                   //不执行消息绑定的事件,直接关闭
+                  //Notify.MsgList.splice(0,1);
                   msg.close();
                   setTimeout(function () {
                     Notify.run();
@@ -114,6 +118,7 @@ Notify.run=function(){
         }
         if(Notify.MsgList[0].type==1)
         {
+          $(Notify.container).css("display")=="none"?$(Notify.container).css("display","block"):false;
           $(Notify.container).append(Notify.MsgList[0].gethtml());
           Notify.MsgList[0].append=true;
           //点击消息主体触发事件并关闭消息显示下一条消息
@@ -121,6 +126,7 @@ Notify.run=function(){
               $(this).fadeOut();
               Notify.MsgList[0].click_fn();
               Notify.MsgList.splice(0,1);
+              $(Notify.container).css("display")!="none"?$(Notify.container).css("display","none"):false;
               //执行下一条消息
               setTimeout(function () {
                 Notify.run();
